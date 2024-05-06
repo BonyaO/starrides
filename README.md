@@ -4,19 +4,37 @@ StarRides: Car Rental App is a school project to build a platform for people to 
 
 ## Project Setup
 
-create environment
+#### Create Python environment
 ```shell
 python3 -m venv venv
 source venv/bin/active
 
 ```
-pip install django
-django-admin startproject starrides
-django-admin startapp rides
-sudo apt-get install libpq-dev python3-dev
-pip3 install psycopg2
-sudo -u postgres psql
-pip3 install django-environ
 
-pip3 install Pillow
+#### Create your database and set environment variables
+Create Database
+```shell
+sudo -u postgres psql
+
+CREATE DATABASE mydb
+
+CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypass';
+
+GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;
+```
+
+Modify [.env](./starrides/.env.example) file 
+```shell
+cp .env.example .env
+
+# Enter your database details you created previously
+```
+
+#### Install requirement packages
+
+```shell
+# Move to the ./starrides/ directory and run the following command
+
+pip3 install -r requirements.txt
+```
 
