@@ -1,0 +1,44 @@
+{% extends 'rides_base.html' %} {% load static %}
+
+{% block content %}
+<h2>{{ car.make }} {{ car.model }} ({{ car.car_type }})</h2>
+
+<img src="{{ car.image.url }}" alt="{{ car.make }}" style="max-width: 100%; height: auto;">
+
+    <li>**Make:** {{ car.make }}</li>
+    <li>**Model:** {{ car.model }}</li>
+    <li>**Owner:** {{ car.owner.user.username }}</li>
+
+    <li>**Rental Price:** </li>
+    <li>**Location:** {{ car.owner.address }}</li>
+
+    <li>**Year:** {{ car.year }}</li>
+    <li>**Car type:**  {{ car.car_type }}</li>
+    <li>**Transmission:** {{ car.transmission }}</li>
+    <li>**Mileage:** {{ car.mileage }}</li>
+    <li>**Door:**  {{ car.doors }}</li>
+    <li>**Passenger Capacity:** {{ car.passenger_capacity }}</li>
+    {% if car.owner.user == user %}
+        <form method="post" id="delete-form">
+            {% csrf_token %}
+             <button type="button" onclick="confirmDelete()">Delete</button>
+        </form>
+
+    <a href="{% url 'edit_car' car.id %}">Edit Car</a>
+
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure you want to delete this car?")) {
+                document.getElementById('delete-form').submit();
+            }
+        }
+    </script>
+
+    {% endif %}
+
+
+
+
+
+<a href="{% url 'index' %}" class="btn btn-secondary">Back to Car List</a>
+{% endblock content %}

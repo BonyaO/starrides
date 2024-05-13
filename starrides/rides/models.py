@@ -15,7 +15,7 @@ class CarOwner(models.Model):
     phone_number = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.user.name
+        return self.user.last_name
 
 class Car(models.Model):
     make = models.CharField(max_length=50)

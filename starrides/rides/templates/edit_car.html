@@ -1,0 +1,10 @@
+{% extends 'rides_base.html' %}
+
+{% block content %}
+<h2>Edit Car</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Car</button>
+</form>
+{% endblock content %}

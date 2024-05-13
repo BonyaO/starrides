@@ -23,7 +23,7 @@ CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypass';
 GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;
 ```
 
-Modify [.env](./starrides/.env.example) file 
+Modify [.env](./starrides/starrides/.env.example) file 
 ```shell
 cp .env.example .env
 

@@ -1,0 +1,46 @@
+body {
+    font-family: sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f0f0f0;
+}
+
+nav a {
+    margin-left: 1rem;
+}
+
+.car-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.car-list li {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.car-detail img {
+    margin-bottom: 1rem;
+}
+
+.car-detail ul {
+    list-style: none;
+    padding: 0;
+}
+
+.car-detail li {
+    margin-bottom: 0.5rem;
+}
+button.link-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}
