@@ -21,13 +21,14 @@ class Car(models.Model):
     make = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
     year = models.IntegerField()
+    rental_price = models.IntegerField()
     vin = models.CharField(max_length=50, unique=True)
     car_type = models.ForeignKey(CarType, on_delete=models.CASCADE)
     transmission = models.CharField(max_length=10)
     mileage = models.IntegerField()
     doors = models.IntegerField()
     passenger_capacity = models.IntegerField()
-    image = models.ImageField(upload_to='car_images/')  # Adjust upload path as needed
+    image = models.ImageField(upload_to='car_images/', blank=True, null=True)  # Adjust upload path as needed
     is_available = models.BooleanField(default=True)
     owner = models.ForeignKey(CarOwner, on_delete=models.CASCADE)
 
@@ -40,10 +41,11 @@ class Rental(models.Model):
     pick_up_location = models.CharField(max_length=255)
     pick_up_date = models.DateTimeField()
     drop_off_date = models.DateTimeField()
-    rental_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
+    rental_amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.00'))])
 
     def __str__(self):
         return f"Rental ID: {self.id} - Car: {self.car}"
+
 
 
 

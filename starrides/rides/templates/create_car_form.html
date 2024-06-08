@@ -1,14 +1,25 @@
 {% extends "rides_base.html" %}
 
 {% block content %}
-<h2>Create Car</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
+{% load crispy_forms_tags %}
+<h2>Upload new Car</h2>
 
-  {% if form.errors.image %}
-        <div class="error">{{ form.errors.image.as_text }}</div>
+<form method="post" enctype="multipart/form-data" style="max-width: 400px; margin: 0 auto;">
+    {% csrf_token %}
+    <div style="margin-bottom: 20px;">
+        {{ form | crispy}}
+    </div>
+
+    {% if form.errors.image %}
+    <div class="error" style="color: red; font-size: 14px; margin-bottom: 10px;">
+        {{ form.errors.image.as_text }}
+    </div>
     {% endif %}
-  <button type="submit">Save</button>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'profile' %}" class="btn btn-secondary ">Cancel</a>
+    <div style="clear:both;"></div>
 </form>
+</div>
+
 {% endblock %}

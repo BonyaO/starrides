@@ -1,0 +1,69 @@
+{% extends 'rides_base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form method="post" id="rental-form">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div id="rental-amount">Rental Amount: $0.00</div>
+            <button type="submit">Confirm Rental</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const rentForm = document.getElementById('rental-form');
+    const pickupDateInput = document.getElementById('id_pick_up_date');
+    const dropoffDateInput = document.getElementById('id_drop_off_date');
+    const rentalAmountDiv = document.getElementById('rental-amount');
+    const hourlyPrice = parseFloat("{{ car.rental_price }}"); // Get hourly price from Django context
+
+    function calculateRentalAmount() {
+        const pickupDate = new Date(pickupDateInput.value);
+        const dropoffDate = new Date(dropoffDateInput.value);
+
+        // Ensure both dates are valid and dropoff is after pickup
+        if (isNaN(pickupDate) || isNaN(dropoffDate) || pickupDate >= dropoffDate) {
+            rentalAmountDiv.textContent = 'Invalid dates'; // Display error message
+            return;
+        }
+
+        // Calculate time difference in milliseconds
+        const timeDiff = dropoffDate - pickupDate;
+
+        // Convert milliseconds to hours and round up
+        const hours = Math.ceil(timeDiff / (1000 * 60 * 60));
+
+        // Calculate estimated rental amount
+        const rentalAmount = (hours * hourlyPrice).toFixed(2);
+
+        // Update the display
+        rentalAmountDiv.textContent = `Estimated Amount: $${rentalAmount}`;
+
+        // Ensure the hidden input is created and updated *before* form submission
+        rentForm.addEventListener('submit', function(event) {
+        // Check if the rental_amount input exists, create it if not
+        let rentalAmountInput = rentForm.querySelector('input[name="rental_amount"]');
+        if (!rentalAmountInput) {
+            rentalAmountInput = document.createElement('input');
+            rentalAmountInput.type = 'hidden';
+            rentalAmountInput.name = 'rental_amount';
+            rentForm.appendChild(rentalAmountInput);
+        }
+
+        // Update the value just before submission
+        rentalAmountInput.value = rentalAmount;
+        });
+    }
+
+    // Event listeners to trigger calculation
+    pickupDateInput.addEventListener('change', calculateRentalAmount);
+    dropoffDateInput.addEventListener('change', calculateRentalAmount);
+
+// Initial calculation when the page loads
+calculateRentalAmount(); // Call it once to set the initial value
+
+</script>
+{% endblock content %}

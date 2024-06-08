@@ -3,10 +3,19 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h2>Sign up</h2>
+<h2>Create New Account</h2>
+{% load crispy_forms_tags %}
+
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign Up</button>
+  {{ form | crispy }}
+   <div class="row">
+    <div class="col-2">
+      <button type="submit" class="btn btn-success">Sign up</button>
+    </div>
+    <div class="col-auto">
+      <p> Already have an account?? <a href="{% url 'login' %}"> Sign in </a> </p>
+    </div>
+  </div>
 </form>
 {% endblock %}

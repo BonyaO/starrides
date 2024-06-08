@@ -1,5 +1,8 @@
 body {
     font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
@@ -8,6 +11,7 @@ header {
     align-items: center;
     padding: 1rem;
     background-color: #f0f0f0;
+    width: 100%;
 }
 
 nav a {
@@ -24,9 +28,7 @@ nav a {
     padding: 1rem;
     margin-bottom: 1rem;
 }
-.car-detail img {
-    margin-bottom: 1rem;
-}
+
 
 .car-detail ul {
     list-style: none;
@@ -36,11 +38,47 @@ nav a {
 .car-detail li {
     margin-bottom: 0.5rem;
 }
-button.link-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    text-decoration: underline;
-    color: blue;
+main {
+    flex: 1;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.auth-buttons button {
+  display: flex;
+  padding: 8px 15px;
+  margin-left: 10px;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.hero img {
+  max-width: 100%;
+  height: auto;
+}
+
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  height: 5 px;
+  width: 100%;
+}
+.d-flex {
+   gap: 15px;
 }
